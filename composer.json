@@ -1,0 +1,19 @@
+{
+    "name": "fa/fa",
+    "description": "description",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Aleksey Anikeev",
+            "email": "aniks@mail.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "fa\\": "vendor/fa",
+            "app\\": "app",
+            "traits\\": "vendor/fa/traits"
+        }
+    }
+}
