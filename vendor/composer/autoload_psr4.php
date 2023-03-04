@@ -6,8 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'traits\\' => array($vendorDir . '/fa2/traits'),
-    'fa2\\' => array($vendorDir . '/fa2'),
+    'traits\\' => array($vendorDir . '/fa/traits'),
+    'fa\\' => array($vendorDir . '/fa'),
     'app\\' => array($baseDir . '/app'),
-    'RedBeanPHP\\' => array($vendorDir . '/gabordemooij/redbean/RedBeanPHP'),
 );

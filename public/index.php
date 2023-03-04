@@ -5,7 +5,7 @@ if (PHP_MAJOR_VERSION < 8) {
     die;
 }
 
-//require_once dirname(__DIR__) . '/config/init.php';
+require_once dirname(__DIR__) . '/config/init.php';
 //require_once FUNC . '/debug.php';
 
 session_start();
