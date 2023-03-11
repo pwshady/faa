@@ -1,0 +1,29 @@
+{
+    "type": "prefix",
+    "regex": "/^..-..$/",
+    "delimiter": "-",
+    "language": "1",
+    "land": "0",
+    "base_language": {
+        "code": "ru"
+    },
+    "base_land": {
+        "code": "ru"
+    },
+    "languages": {
+        "en": {
+            "code": "en"
+        },
+        "ru": {
+            "code": "ru"
+        }
+    },
+    "lands": {
+        "us": {
+            "code": "us"
+        },
+        "ru": {
+            "code": "ru"
+        }
+    }
+}

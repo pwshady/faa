@@ -3,7 +3,7 @@
 define("ROOT", dirname(__DIR__));
 
 #Core constants
-define("CORE", ROOT . '/vendor/fa2');
+define("CORE", ROOT . '/vendor/fa');
 define("TRAIT", CORE . '/traits');
 define("FUNC", CORE . '/func');
 

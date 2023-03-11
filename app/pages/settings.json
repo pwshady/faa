@@ -1,0 +1,51 @@
+{
+    "0": {
+        "title": "title"
+    },
+    "1": {
+        "header_strings": {
+            "string": "<link rel=\"image_src\" href=\"https://archeage.ru/static/aa.mail.ru/img/main/page/soc/soc.jpg\">",
+            "method": 1,
+            "pos": 1,
+            "label": "test"
+        }
+    },
+    "2": {
+        "charset": "utf-8"
+    },
+    "3": {
+        "keywords": "test"
+    },
+    "4": {
+        "description": "td"
+    },
+    "5": {
+        "description": "td"
+    },
+    "6": {
+        "header_strings": {
+            "string": "<link rel=\"shortcut icon\" href=\"https://archeage.ru/static/aa.mail.ru/img/main/favicon.ico\" type=\"image/x-icon\">",
+            "method": 1,
+            "pos": 1,
+            "label": "test"
+        }
+    },
+    "7": {
+        "styles": {
+            "type": "css",
+            "href": "https://archeage.cdn.gmru.net/modules/system/defaults.css?u",
+            "method": 1,
+            "pos": 1,
+            "label": "test"
+        }
+    },
+    "8": {
+        "header_scripts": {
+            "type": "js",
+            "href": "https://aa.cdn.gmru.net/static/aa.mail.ru/js/mr_loader2.js"
+        }
+    },
+    "9": {
+        "cache": "300"
+    }
+}
