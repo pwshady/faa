@@ -2,6 +2,7 @@
 
 namespace fa;
 
+use fa\App;
 use fa\basic\controllers;
 
 class Router
@@ -16,7 +17,7 @@ class Router
         self::removeQueryString($url);
         self::$page_arr = explode('/', self::$page);
         if (file_exists(ROOT . '/app/landlang.json')){
-            echo self::getLandLang();
+            self::getLandLang();
         }
         self::run();
     }
@@ -70,6 +71,7 @@ class Router
 
     protected static function run()
     {
+        App::$app->setGet(self::$get);
         $controller = new basic\controllers\PageController('/app/pages', self::$page_arr);
         $controller->run();
     }

@@ -16,11 +16,6 @@ class PageModel extends Model
         self::getLabels();
         self::getModules();
         self::getWidgets();
-        //debug(App::$app->getAccess());
-        //debug(App::$app->getErrors());
-        //debug(App::$app->getSettings());
-        //debug(App::$app->getLabels());
-        debug(App::$app->getModules());
     }
 
 

@@ -1,0 +1,14 @@
+[2023-03-16 12:58:07] Code: 0 | Message: Call to undefined method fa\Registry::cleanAccess() | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 100
+[2023-03-16 13:07:13] Code: 2 | Message: Undefined property: fa\basic\controllers\SinglePageController::$dir | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/SinglePageController.php | Line: 18
+[2023-03-16 13:08:24] Code: 0 | Message: Call to undefined method fa\basic\controllers\SinglePageController::createdView() | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/SinglePageController.php | Line: 23
+[2023-03-16 13:11:53] Code: 0 | Message: Class "fa\basic\views\PageView" not found | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 113
+[2023-03-16 13:13:48] Code: 0 | Message: Class "fa2\basic\views\View" not found | File: /opt/lampp/htdocs/faa/vendor/fa/basic/views/PageView.php | Line: 7
+[2023-03-16 13:14:21] Code: 2 | Message: Undefined property: fa\basic\controllers\SinglePageController::$dir | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 113
+[2023-03-16 13:14:49] Code: 0 | Message: Call to undefined method fa\basic\controllers\PageController::render() | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 115
+[2023-03-16 13:28:20] Code: 0 | Message: Call to undefined function fa\basic\controllers\dedug() | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 120
+[2023-03-16 13:30:48] Code: 0 | Message: Call to undefined method fa\basic\controllers\PageController::getParams() | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 222
+[2023-03-16 13:35:51] Code: 0 | Message: Class "\app\pages\__\MultiPageController" not found | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 63
+[2023-03-16 13:40:16] Code: 2 | Message: Undefined variable $page_arr | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 122
+[2023-03-16 13:41:47] Code: 2 | Message: Undefined variable $page_arr | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 122
+[2023-03-16 13:42:00] Code: 2 | Message: Undefined variable $page_dir | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 122
+[2023-03-16 14:15:59] Code: 2 | Message: Undefined variable $page_arr | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 21

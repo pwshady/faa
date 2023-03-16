@@ -8,6 +8,8 @@ class Registry
 
     use traits\TSingleton;
 
+    protected static string $get = '';
+
     protected static array $land = ['code' => 'ru'];
     protected static array $language = ['code' => 'ru'];
     protected static array $userRoles = [];
@@ -48,6 +50,26 @@ class Registry
     */
     protected static array $modules = [];
 
+    /*
+    *Key: 'name' - widget name. Required key
+    *Key: 'complete' - Value 1 after code processing
+    *Key: 'code' - Html code resulting from the creation of the widget
+    *Key: 'cache' - Html code caching time in seconds. Optional key
+    *Key: 'view' - View selector. Optional key
+    */
+    protected static array $widgets = [];
+
+    public static function setGet($get)
+    {
+        self::$get = $get;
+        return 1;
+    }
+
+    public static function getGet(): string
+    {
+        return self::$get;
+    }
+
     public static function setLand($land)
     {
         self::$land = $land;
@@ -59,18 +81,18 @@ class Registry
         return self::$land;
     }
 
-    public function setLanguage($language)
+    public static function setLanguage($language)
     {
         self::$language = $language;
         return 1;
     }
 
-    public function getLanguage(): array
+    public static function getLanguage(): array
     {
         return self::$language;
     }
 
-    public function addAccess($value)
+    public static function addAccess($value)
     {
         foreach (self::$userRoles as $ur) {
             if ($ur == $value) {
@@ -81,27 +103,32 @@ class Registry
             return 2;
     }
 
-    public function getAccess(): array
+    public static function getAccess(): array
     {
         return self::$userRoles;
     }
 
-    public function setError($key, $value)
+    public function cleanAccess()
+    {
+        self::$userRoles = [];
+    }
+
+    public static function setError($key, $value)
     {
         self::$errors[$key] = $value;
     }
 
-    public function getError($key)
+    public static function getError($key)
     {
         return self::$errors[$key] ?? null;
     }
 
-    public function getErrors()
+    public static function getErrors()
     {
         return self::$errors;
     }
 
-    public function setSetting($key, $value)
+    public static function setSetting($key, $value)
     {
         $method = 0;
         $pos = true;
@@ -153,32 +180,32 @@ class Registry
         }       
     }
 
-    public function getSetting($key)
+    public static function getSetting($key)
     {
         return self::$settings[$key] ?? null;
     }
 
-    public function getSettings()
+    public static function getSettings()
     {
         return self::$settings;
     }
 
-    public function setLabel($key, $value)
+    public static function setLabel($key, $value)
     {
         self::$labels[$key] = $value;
     }
 
-    public function getLabel($key)
+    public static function getLabel($key)
     {
         return self::$labels[$key] ?? null;
     }
 
-    public function getLabels()
+    public static function getLabels()
     {
         return self::$labels;
     }
 
-    public function setModul($name, $params)
+    public static function setModul($name, $params)
     {
         $method = true;
         $pos = true;
@@ -195,7 +222,7 @@ class Registry
             $pos = $params['pos'];
         }
         if ($method) {
-            $modul = ['name' => $name, 'complete' => false, 'object' => null];
+            $modul = array_merge(['name' => $name, 'complete' => false, 'object' => null], $params);
             if ($pos) {
                 array_push($result, $modul);
             } else {
@@ -205,7 +232,7 @@ class Registry
         self::$modules = $result;
     }
 
-    public function getModul($name)
+    public static function getModul($name)
     {
         foreach ( self::$modules as $key => $value) {
             if ( array_key_exists('name', $value) ) {
@@ -218,12 +245,12 @@ class Registry
         return null;
     }
 
-    public function getModules()
+    public static function getModules()
     {
         return self::$modules;
     }
 
-    public function updateModul($modul)
+    public static function updateModul($modul)
     {
         foreach ( self::$modules as $key => $value) {
             if ( array_key_exists('name', $value) ) {
@@ -233,4 +260,62 @@ class Registry
             }
         }
     }
+
+    public static function setWidget($name, $params)
+    {
+        $method = true;
+        $pos = true;
+        $result = [];
+        foreach (self::$widgets as $widget) {
+            if ($name != $widget['name']) {
+                array_push($result, $widget);
+            }                               
+        }
+        if (array_key_exists('method', $params)) {
+            $method = $params['method'];
+        }
+        if (array_key_exists('pos', $params)) {
+            $pos = $params['pos'];
+        }
+        if ($method) {
+            $widget = array_merge(['name' => $name, 'complete' => false, 'code' => ''], $params);
+            if ($pos) {
+                array_push($result, $widget);
+            } else {
+                array_unshift($result, $widget);
+            }
+        }
+        self::$widgets = $result;
+    }
+
+    public static function getWidget($name)
+    {
+        foreach ( self::$widgets as $key => $value) {
+            if ( array_key_exists('name', $value) ) {
+                if ( $value['name'] == $name ) 
+                {
+                    return $value;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static function getWidgets()
+    {
+        return self::$widgets;
+    }
+
+    public static function updateWidget($widget)
+    {
+        foreach ( self::$widgets as $key => $value) {
+            if ( array_key_exists('name', $value) ) {
+                if ( $widget['name'] == $value['name'] ) {
+                    self::$widgets[$key] = $widget;
+                }
+            }
+        }
+    }
+
+
 }
