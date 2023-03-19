@@ -20,9 +20,13 @@ class MultiPageController extends PageController
         } else {
             $view_name = App::$app->getSetting('view') ? App::$app->getSetting('view') : 'index';
             if ( file_exists(ROOT . $this->page_dir . $view_name . 'View.php') ) {
-                echo self::createdView($view_name);
+                self::createdView($view_name);
             } else {
-                $controller = new PageController('/vendor/fa/pages', array_merge(['samples', 'multi'], $this->page_arr));
+                if (App::$app->getError('1002') !== '') {                        
+                    $controller = new PageController('/app/pages', explode('/', App::$app->getError('1002') . '/' . App::$app->getRequest()), []);
+                } else {
+                    $controller = new PageController('/vendor/fa/pages', array_merge(['samples', 'multi'], explode('/', App::$app->getRequest())), []);
+                }
                 $controller->run();
             }
         }

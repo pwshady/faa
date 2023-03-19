@@ -12,16 +12,18 @@ class Model
 
     public function getAccess()
     {
-        if (file_exists(ROOT . $this->page_dir . 'access.json')) {       
-            $access = json_decode(file_get_contents(ROOT . $this->page_dir . 'access.json'), true);
-            App::$app->addAccess($access);
+        if (file_exists(ROOT . $this->dir . 'access.json')) {       
+            $access = json_decode(file_get_contents(ROOT . $this->dir . 'access.json'), true);
+            if ($access != '') {
+                App::$app->addAccess($access);
+            }
         }
     }
 
     public function getErrors()
     {
-        if (file_exists(ROOT . $this->page_dir . 'errors.json')) {
-            $errors = json_decode(file_get_contents(ROOT . $this->page_dir . 'errors.json'), true);
+        if (file_exists(ROOT . $this->dir . 'errors.json')) {
+            $errors = json_decode(file_get_contents(ROOT . $this->dir . 'errors.json'), true);
             if (is_array($errors)) {
                 foreach ($errors as $key => $value) {
                     App::$app->setError($key, $value);
@@ -32,8 +34,8 @@ class Model
 
     public function getSettings()
     {
-        if (file_exists(ROOT . $this->page_dir . 'settings.json')) {           
-            $settings = json_decode(file_get_contents(ROOT . $this->page_dir . 'settings.json'), true);
+        if (file_exists(ROOT . $this->dir . 'settings.json')) {           
+            $settings = json_decode(file_get_contents(ROOT . $this->dir . 'settings.json'), true);
             if (is_array($settings)) {
                 foreach ($settings as $key => $value) {
                     foreach ($value as $key => $value) {
@@ -46,8 +48,8 @@ class Model
 
     public function getLabels()
     {
-        if (file_exists(ROOT . $this->page_dir . 'labels.json')) {            
-            $labels = json_decode(file_get_contents(ROOT . $this->page_dir . 'labels.json'), true);
+        if (file_exists(ROOT . $this->dir . 'labels.json')) {            
+            $labels = json_decode(file_get_contents(ROOT . $this->dir . 'labels.json'), true);
             if (is_array($labels)) {
                 $language = App::$app->getLanguage()['code'];
                 if (array_key_exists($language, $labels)) {
@@ -62,8 +64,8 @@ class Model
 
     public function getModules()
     {
-        if (file_exists(ROOT . $this->page_dir . 'modules.json')) {
-            $modules = json_decode(file_get_contents(ROOT . $this->page_dir . 'modules.json'), true);
+        if (file_exists(ROOT . $this->dir . 'modules.json')) {
+            $modules = json_decode(file_get_contents(ROOT . $this->dir . 'modules.json'), true);
             if (is_array($modules)) {
                 foreach ($modules as $key => $value) {
                     App::$app->setModul($key, $value);
@@ -74,8 +76,8 @@ class Model
 
     public function getWidgets()
     {
-        if (file_exists(ROOT . $this->page_dir . 'widgets.json')) {
-            $widgets = json_decode(file_get_contents(ROOT . $this->page_dir . 'widgets.json'), true);
+        if (file_exists(ROOT . $this->dir . 'widgets.json')) {
+            $widgets = json_decode(file_get_contents(ROOT . $this->dir . 'widgets.json'), true);
             if (is_array($widgets)) {
                 foreach ($widgets as $key => $value) {
                     App::$app->setWidget($key, $value);

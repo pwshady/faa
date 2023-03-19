@@ -6,7 +6,7 @@ use fa\App;
 
 class PageModel extends Model
 {
-    public function __construct(public $page_dir){}
+    public function __construct(public $dir){}
 
     public function run()
     {

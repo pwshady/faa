@@ -9,7 +9,7 @@ class PageController extends Controller
 
     public object $model;
 
-    public function __construct(public $page_dir, public $page_arr){}
+    public function __construct(public $page_dir, public $page_arr, public $cont_arr){}
 
     public function run()
     {
@@ -19,31 +19,43 @@ class PageController extends Controller
     public function getController()
     {
         if ($this->page_arr && !$this->page_arr[0]) {
+            array_push($this->cont_arr,'');
             array_shift($this->page_arr);
+            App::$app->setPage(implode('/', $this->cont_arr));
+            App::$app->setRequest(implode('/',$this->page_arr));
         }
         $this->page_dir .= '/';
         $controller_path = str_replace('/', '\\', $this->page_dir) . 'PageController';
         if (class_exists($controller_path) && ($controller_path != '\\' . __CLASS__)) {
-            $controller = new $controller_path($this->page_dir, $this->page_arr);
+            $controller = new $controller_path($this->page_dir, $this->page_arr, $this->cont_arr);
             $controller->run();
         } else {
+            App::$app->setPage(implode('/', $this->cont_arr));
+            App::$app->setRequest(implode('/',$this->page_arr));
             self::job();
             if ($this->page_arr) {
                 if (is_dir(ROOT . $this->page_dir . $this->page_arr[0]) && ($this->page_arr[0] != '_')) {
                     $this->page_dir .= $this->page_arr[0];
+                    array_push($this->cont_arr, $this->page_arr[0]);
                     array_shift($this->page_arr);
                     $controller_path = 'fa\basic\controllers\PageController';
-                    $controller = new $controller_path($this->page_dir, $this->page_arr);
+                    $controller = new $controller_path($this->page_dir, $this->page_arr, $this->cont_arr);
                 } else {
+                    App::$app->setPage(implode('/', $this->cont_arr));
+                    App::$app->setRequest(implode('/',$this->page_arr));
                     if (is_dir(ROOT . $this->page_dir . '__')) {
                         $controller_path = str_replace('/', '\\', $this->page_dir) . '__\MultiPageController';
                         if (!(class_exists($controller_path) && ($controller_path != '\\' . __CLASS__))) {
                             $controller_path = 'fa\basic\controllers\MultiPageController';
                         }
-                        $controller = new $controller_path($this->page_dir . '__/', $this->page_arr);
-                        array_shift($this->page_arr);
+                        $controller = new $controller_path($this->page_dir . '__/', $this->page_arr, $this->cont_arr);
                     } else {
-                        $controller = new PageController('/vendor/fa/pages', ['errors', '404']);
+                        if (App::$app->getError('404') !== '') {                        
+                            $controller = new PageController('/app/pages', explode('/', App::$app->getError('404') . '/' . App::$app->getRequest()), []);
+                            echo 'hhh=' . App::$app->getRequest();
+                        } else {
+                            $controller = new PageController('/vendor/fa/pages', array_merge(['errors', '404'], explode('/', App::$app->getRequest())), []);
+                        }
                     }                  
                 }
             } else {
@@ -52,18 +64,20 @@ class PageController extends Controller
                     if (!(class_exists($controller_path) && ($controller_path != '\\' . __CLASS__))) {
                         $controller_path = 'fa\basic\controllers\SinglePageController';
                     }
-                    $controller = new $controller_path($this->page_dir . '_/', $this->page_arr);     
-                    array_shift($this->page_arr);
+                    $controller = new $controller_path($this->page_dir . '_/', $this->page_arr, $this->cont_arr);     
                 } else {
                     if (is_dir(ROOT . $this->page_dir . '__')) {
                         $controller_path = str_replace('/', '\\', $this->page_dir) . '__\MultiPageController';
                         if (!(class_exists($controller_path) && ($controller_path != '\\' . __CLASS__))) {
                             $controller_path = 'fa\basic\controllers\MultiPageController';
                         }
-                        $controller = new $controller_path($this->page_dir . '__/', $this->page_arr);      
-                        array_shift($this->page_arr);
+                        $controller = new $controller_path($this->page_dir . '__/', $this->page_arr, $this->cont_arr);    
                     }  else {
-                        $controller = new PageController('/vendor/fa/pages', ['errors', '404']);
+                        if (App::$app->getError('404') !== '') {                        
+                            $controller = new PageController('/app/pages', explode('/', App::$app->getError('404') . '/' . App::$app->getRequest()), []);
+                        } else {
+                            $controller = new PageController('/vendor/fa/pages', array_merge(['errors', '404'], explode('/', App::$app->getRequest())), []);
+                        }
                     } 
                 }     
             }
@@ -98,7 +112,11 @@ class PageController extends Controller
             if (!in_array($value, $user_roles)) {
                 //=============================================
                 App::$app->cleanAccess();
-                $controller = new PageController('/vendor/fa/pages', ['errors', '500']);
+                if (App::$app->getError('500') !== '') {                        
+                    $controller = new PageController('/app/pages', explode('/', App::$app->getError('500') . '/' . App::$app->getRequest()), []);
+                } else {
+                    $controller = new PageController('/vendor/fa/pages', array_merge(['errors', '500'], explode('/', App::$app->getRequest())), []);
+                }
                 $controller->run();
                 die;
             }
@@ -108,23 +126,26 @@ class PageController extends Controller
     public function createdView($view_name)
     {
         self::createdModules();
-        //self::createdWidgets();
+        self::createdWidgets();
         $view_path = 'fa\basic\views\PageView';
         $view = new $view_path($this->page_dir, $view_name);
         $view->run();
-        return self::render($view->render());
+        self::render($view->render());
     }
 
     public function render($view)
     {
         debug(App::$app->getWidgets());
         debug(App::$app->getModules());
-        debug($this->page_arr);
+        echo '<br>==============';
+        debug(App::$app->getPage());
+        debug(App::$app->getRequest());
+        debug(App::$app->getGet());
         $html = '';
         $html .= self::headerCreate();
         $html .= $view . PHP_EOL;
         $html .= self::footerCreate();
-        return $html;
+        echo $html;
     }
 
     public function headerCreate()
@@ -261,5 +282,31 @@ class PageController extends Controller
             $modul['complete'] = $modul['object']->run();
         }
         App::$app->updateModul($modul);
+    }
+
+    public function createdWidgets()
+    {
+        $widgets = (App::$app->getWidgets());
+        foreach ( $widgets as $widget ) {
+            if ( array_key_exists('name', $widget) ) {
+                $params = self::getParams('w-' . $widget['name'] . '-');
+                self::createdWidget($widget, $params);                  
+            }
+        }
+    }
+
+    public function createdWidget($widget, $params)
+    {
+        $controller_path = 'app\widgets\\' . $widget['name'] . '\Controller';
+        if ( !class_exists($controller_path) ) {
+            $controller_path = 'fa\basic\controllers\WidgetController';
+        }
+        $controller = new $controller_path($this->page_dir, $widget['name'], $params);
+        if (method_exists($controller, 'run')) {
+            $controller->run();
+        }
+        if (method_exists($controller, 'render')) {
+            $controller->render();
+        }
     }
 }

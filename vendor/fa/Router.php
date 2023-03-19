@@ -16,6 +16,7 @@ class Router
     {
         self::removeQueryString($url);
         self::$page_arr = explode('/', self::$page);
+        //Loag config
         if (file_exists(ROOT . '/app/landlang.json')){
             self::getLandLang();
         }
@@ -72,7 +73,7 @@ class Router
     protected static function run()
     {
         App::$app->setGet(self::$get);
-        $controller = new basic\controllers\PageController('/app/pages', self::$page_arr);
+        $controller = new basic\controllers\PageController('/app/pages', self::$page_arr, []);
         $controller->run();
     }
 
@@ -86,13 +87,14 @@ class Router
             }
             $res_land = -1;
             $res_languages = -1;
-            if (array_key_exists('delimiter', $ll)) {
-                if ($ll['delimiter'] == '/') {
-                    return -1;
-                }
-                preg_match($regex, $page_arr[0], $prefix);
-                $prefix_arr = explode($ll['delimiter'], $prefix[0]);
-                if (array_key_exists('land', $ll)) {
+            preg_match($regex, $page_arr[0], $prefix);
+            if ($prefix) {
+                if (array_key_exists('delimiter', $ll)) {
+                    if ($ll['delimiter'] == '/') {
+                        return -1;
+                    }                
+                    $prefix_arr = explode($ll['delimiter'], $prefix[0]);
+                    if (array_key_exists('land', $ll)) {
                     switch ($ll['land']) {
                         case '0':
                             if (array_key_exists('lands', $ll)) {
@@ -123,8 +125,8 @@ class Router
                         default:
                             return -100;
                     }
-                }
-                if (array_key_exists('language', $ll)) {
+                    }
+                    if (array_key_exists('language', $ll)) {
                     switch ($ll['language']) {
                         case '0':
                             if (array_key_exists('languages', $ll)) {
@@ -156,10 +158,9 @@ class Router
                             return -100;
                     }
 
-                }
-            } else {
-                preg_match($regex, $page_arr[0], $prefix);
-                if (array_key_exists('land', $ll)) {
+                    }
+                } else {
+                    if (array_key_exists('land', $ll)) {
                     switch ($ll['land']) {
                         case '0':
                             if (array_key_exists('lands', $ll)) {
@@ -177,8 +178,8 @@ class Router
                         default:
                             return -100;
                     }
-                }
-                if (array_key_exists('language', $ll)) {
+                    }
+                    if (array_key_exists('language', $ll)) {
                     switch ($ll['language']) {
                         case '0':
                             if (array_key_exists('languages', $ll)) {
@@ -195,6 +196,7 @@ class Router
                             break;
                         default:
                             return -100;
+                    }
                     }
                 }
             }

@@ -12,3 +12,24 @@
 [2023-03-16 13:41:47] Code: 2 | Message: Undefined variable $page_arr | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 122
 [2023-03-16 13:42:00] Code: 2 | Message: Undefined variable $page_dir | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 122
 [2023-03-16 14:15:59] Code: 2 | Message: Undefined variable $page_arr | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 21
+[2023-03-17 14:13:54] Code: 0 | Message: Too few arguments to function fa\basic\controllers\PageController::__construct(), 2 passed in /opt/lampp/htdocs/faa/vendor/fa/Router.php on line 76 and exactly 3 expected | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 12
+[2023-03-17 14:16:37] Code: 0 | Message: Cannot assign array to property fa\Registry::$page of type string | File: /opt/lampp/htdocs/faa/vendor/fa/Registry.php | Line: 67
+[2023-03-17 14:19:21] Code: 2 | Message: Undefined array key 0 | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 61
+[2023-03-17 14:34:43] Code: 2 | Message: Undefined property: fa\basic\controllers\PageController::$cont_page | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 53
+[2023-03-17 14:37:44] Code: 2 | Message: Undefined array key 0 | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 65
+[2023-03-17 14:42:47] Code: 0 | Message: Too few arguments to function fa\basic\controllers\PageController::__construct(), 2 passed in /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/SinglePageController.php on line 25 and exactly 3 expected | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 12
+[2023-03-17 14:47:47] Code: 0 | Message: Call to undefined method fa\basic\controllers\MultiPageController::runView() | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/MultiPageController.php | Line: 19
+[2023-03-19 14:40:07] Code: 8192 | Message: explode(): Passing null to parameter #2 ($string) of type string is deprecated | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/MultiPageController.php | Line: 26
+[2023-03-19 14:53:27] Code: 1 | Message: Allowed memory size of 536870912 bytes exhausted (tried to allocate 20480 bytes) | File: /opt/lampp/htdocs/faa/vendor/fa/basic/models/Model.php | Line: 36
+[2023-03-19 14:53:27] Code: 8 | Message: ob_end_clean(): Failed to delete buffer. No buffer to delete | File: /opt/lampp/htdocs/faa/vendor/fa/ErrorHandler.php | Line: 49
+[2023-03-19 18:44:08] Code: 2 | Message: Undefined array key 0 | File: /opt/lampp/htdocs/faa/vendor/fa/Router.php | Line: 95
+[2023-03-19 18:46:58] Code: 2 | Message: Undefined array key 0 | File: /opt/lampp/htdocs/faa/vendor/fa/Router.php | Line: 96
+[2023-03-19 18:47:35] Code: 2 | Message: Undefined variable $prefix | File: /opt/lampp/htdocs/faa/vendor/fa/Router.php | Line: 94
+[2023-03-19 20:22:18] Code: 0 | Message: Call to undefined method fa\basic\controllers\PageController::createdWidgets() | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 129
+[2023-03-19 20:36:44] Code: 0 | Message: Class "fa2\basic\controllers\WidgetController" not found | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/PageController.php | Line: 304
+[2023-03-19 20:41:51] Code: 2 | Message: Undefined property: fa\basic\controllers\WidgetController::$dir | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/WidgetController.php | Line: 46
+[2023-03-19 20:43:17] Code: 0 | Message: Class "fa2\basic\models\WidgetModel" not found | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/WidgetController.php | Line: 26
+[2023-03-19 20:44:58] Code: 0 | Message: Class "fa2\basic\models\WidgetModel" not found | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/WidgetController.php | Line: 26
+[2023-03-19 20:46:09] Code: 0 | Message: Class "fa2\basic\models\Model" not found | File: /opt/lampp/htdocs/faa/vendor/fa/basic/models/WidgetModel.php | Line: 7
+[2023-03-19 20:47:05] Code: 2 | Message: Undefined property: fa\basic\models\WidgetModel::$page_dir | File: /opt/lampp/htdocs/faa/vendor/fa/basic/models/Model.php | Line: 37
+[2023-03-19 20:51:53] Code: 2 | Message: require_once(/opt/lampp/htdocs/faa/app/widgets/test/indexView.php): Failed to open stream: No such file or directory | File: /opt/lampp/htdocs/faa/vendor/fa/basic/controllers/WidgetController.php | Line: 34

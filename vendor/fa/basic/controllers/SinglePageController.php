@@ -20,9 +20,13 @@ class SinglePageController extends PageController
         } else {
             $view_name = App::$app->getSetting('view') ? App::$app->getSetting('view') : 'index';
             if ( file_exists(ROOT . $this->page_dir . $view_name . 'View.php') ) {
-                echo self::createdView($view_name);
+                self::createdView($view_name);
             } else {
-                $controller = new PageController('/vendor/fa/pages', array_merge(['samples', 'single'], $this->page_arr));
+                if (App::$app->getError('1001') !== '') {                        
+                    $controller = new PageController('/app/pages', explode('/', App::$app->getError('1001')), []);
+                } else {
+                    $controller = new PageController('/vendor/fa/pages', ['samples', 'single'], []);
+                }
                 $controller->run();
             }
         }

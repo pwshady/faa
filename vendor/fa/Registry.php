@@ -8,14 +8,17 @@ class Registry
 
     use traits\TSingleton;
 
+    protected static string $page = '';
+    protected static string $request = '';
+
     protected static string $get = '';
 
     protected static array $land = ['code' => 'ru'];
     protected static array $language = ['code' => 'ru'];
     protected static array $userRoles = [];
     protected static array $errors = [
-        '404' => 'aaaaaaa',
-        '500' => 'aaaaaaa',
+        '404' => '',
+        '500' => '',
     ];
     protected static array $settings = [
         'title' => '',
@@ -58,6 +61,28 @@ class Registry
     *Key: 'view' - View selector. Optional key
     */
     protected static array $widgets = [];
+
+    public static function setPage($page)
+    {
+        self::$page = $page;
+        return 1;
+    }
+
+    public static function getPage(): string
+    {
+        return self::$page;
+    }
+
+    public static function setRequest($request)
+    {
+        self::$request = $request;
+        return 1;
+    }
+
+    public static function getRequest(): string
+    {
+        return self::$request;
+    }
 
     public static function setGet($get)
     {
@@ -120,7 +145,7 @@ class Registry
 
     public static function getError($key)
     {
-        return self::$errors[$key] ?? null;
+        return self::$errors[$key] ?? '';
     }
 
     public static function getErrors()
