@@ -125,6 +125,10 @@ class PageController extends Controller
 
     public function createdView($view_name)
     {
+        if (isAjax()){
+            echo 'ajax';
+            die;
+        }
         self::createdModules();
         self::createdWidgets();
         $view_path = 'fa\basic\views\PageView';
